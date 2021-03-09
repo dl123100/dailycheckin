@@ -41,6 +41,7 @@ def main_handler(event, context):
                         msg = check_func(check_item).main()
                         content_list.append(f"【{check_name}】\n{msg}")
                     except Exception as e:
+                        content_list.append(f"【{check_name}】\n{e}")
                         print(check_name, e)
                 else:
                     print(f"检测【{check_name}】脚本到配置文件包含模板配置,进行跳过")
@@ -56,6 +57,7 @@ def main_handler(event, context):
                                 msg = check_func(check_item).main()
                                 content_list.append(f"【{check_name}】\n{msg}")
                             except Exception as e:
+                                content_list.append(f"【{check_name}】\n{e}")
                                 print(check_name, e)
                         else:
                             print(f"检测【{check_name}】脚本到配置文件包含模板配置,进行跳过")
@@ -68,7 +70,7 @@ def main_handler(event, context):
                 print(e)
                 msg_list = []
             content_list += msg_list
-    content_list.append(f"本次任务使用时间: {time.time() - start_time} 秒")
+    content_list.append(f"任务使用时间: {int(time.time() - start_time)} 秒")
     if message == "xmly":
         if utc_time.hour in [9, 18] and utc_time.minute == 0:
             flag = True
